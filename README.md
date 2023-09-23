@@ -2,7 +2,7 @@
 It is a Simple Python Based Reverse Shell Generator Tool. It supports Multiple Language to Generate Shell
 
 # Overview
-The Reverse Shell Generator is a Python-based command-line tool that simplifies the creation of reverse shell payloads for various target platforms. It allows penetration testers and ethical hackers to quickly generate shell commands or scripts for establishing reverse shell connections to remote hosts.
+This Reverse Shell Generator is a Python-based command-line tool that simplifies the creation of reverse shell payloads for various target platforms. It is only for Educational Purposes. You can use it in CTF's or Penetration Testing Scenarios.
 
 # Features
 - Support Different Language to Generate Shell
@@ -11,5 +11,5 @@ The Reverse Shell Generator is a Python-based command-line tool that simplifies 
 
 # Usage
 git clone https://github.com/SubhankarX01/ReverseShellGen/
-   cd ReverseShellGen
-   python3 rev_gen.py -h
+cd ReverseShellGen
+python3 rev_gen.py -h
