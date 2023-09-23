@@ -11,5 +11,6 @@ This Reverse Shell Generator is a Python-based command-line tool that simplifies
 
 # Usage
 git clone https://github.com/SubhankarX01/ReverseShellGen/
-cd ReverseShellGen
-python3 rev_gen.py -h
+- cd ReverseShellGen
+- python3 rev_gen.py -h
+- or chmod +x rev_gen.py; ./rev_gen.py -h
