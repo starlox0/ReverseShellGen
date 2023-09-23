@@ -8,6 +8,7 @@ This Reverse Shell Generator is a Python-based command-line tool that simplifies
 - Support Different Language to Generate Shell.
 - Easily customizable for different scenarios.
 - Helpful comments and documentation in the generated code.
+- Suppported OS Linux.
 
 # Usage
 git clone https://github.com/SubhankarX01/ReverseShellGen/
