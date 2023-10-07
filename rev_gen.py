@@ -33,13 +33,15 @@ print(banner)
 
 
 # Usage of the Script
-usage = '''\033[1m[+]\033[0m \033[91m\033[1mUsage\033[0m\033[0m : \033[32mpython3 rev_gen.py IP PORT PLATFORM SHELL_TYPE\033[0m\n'''
+usage = '''\033[1m[+]\033[0m \033[91m\033[1mUsage\033[0m\033[0m : \033[32mpython3 rev_gen.py IP PORT PLATFORM SHELL_TYPE BASE64_ENCODE\033[0m\n'''
 
 support = "\033[1m[+]\033[0m \033[91m\033[1mPlatform\033[0m\033[0m : \033[32mBash, Netcat, PHP, Python2-3, Perl, Go, Lua, Groovy, PS, Ruby, Nodejs, Socat, Java\033[0m\n"
 
 shell_type = "\033[1m[+]\033[0m \033[91m\033[1mShell Type\033[0m\033[0m : \033[32mbash, sh, zsh, /bin/bash etc......\033[0m\n"
 
 exp = "\033[1m[+]\033[0m \033[91m\033[1mExp\033[0m\033[0m : \033[32mpython3 rev_gen.py 1.1.1.1 1111 php bash\033[0m\n"
+note = "\033[1m[+]\033[0m \033[91m\033[1mNote\033[0m\033[0m : \033[32mpython3 rev_gen.py 1.1.1.1 1111 bash bash [--encode] or [-e] encode currently supported for bash, netcat & socat\033[0m\n"
+
 
 note = "\033[1m[+]\033[0m \033[91m\033[1mNote\033[0m\033[0m : \033[32mpython3 rev_gen.py 1.1.1.1 1111 bash bash [--encode] or [-e] \033[91m\033[1m[Encode Base64 currently supported for bash, netcat & socat]\033[0m\033[0m\n"
 
