@@ -11,7 +11,25 @@ This Reverse Shell Generator is a Python-based command-line tool that simplifies
 - Suppported OS Linux.
 
 # Usage
+```console
 git clone https://github.com/SubhankarX01/ReverseShellGen/
-- cd ReverseShellGen
-- python3 rev_gen.py -h
-- or chmod +x rev_gen.py; ./rev_gen.py -h
+```
+```console
+cd ReverseShellGen
+```
+```console
+python3 rev_gen.py -h
+```
+OR
+```console
+git clone https://github.com/SubhankarX01/ReverseShellGen/
+```
+```console
+cd ReverseShellGen
+```
+```console
+chmod +x rev_gen.py 
+```
+```console
+./rev_gen.py -h
+```
