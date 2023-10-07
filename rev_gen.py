@@ -75,7 +75,9 @@ IP = str(sys.argv[1])
 PORT = str(sys.argv[2])
 PLATFORM = str(sys.argv[3])
 ST = str(sys.argv[4])
-B64ENCODE=str(sys.argv[5])
+B64ENCODE=None
+if(len(sys.argv) > 5):
+	B64ENCODE=str(sys.argv[5])
 
 def genBase64(payload):
 	if B64ENCODE=='--encode' or B64ENCODE=='-e':
