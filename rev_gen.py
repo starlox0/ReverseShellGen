@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Topic : Reverse Shell Generator (Python3)
-# Author : Subhankar Paul
+# Author : Subhankar Paul (starlox)
 # Github Page
 # Date : 23-09-2023
 # Usage : python3 <ip> <port> <platform> <shell_type>
